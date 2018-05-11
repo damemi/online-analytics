@@ -61,6 +61,13 @@ func WatchFuncList(kubeClient kclientset.Interface, osClient osclient.Interface)
 				return kubeClient.Core().Namespaces().Watch(options)
 			},
 		},
+		"resourcequotas": {
+			objType: &api.ResourceQuota{},
+			watchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
+				return kubeClient.Core().ResourceQuotas(api.NamespaceAll).Watch(options)
+			},
+		},
+
 		// Openshift objects
 		"deploymentconfigs": {
 			objType: &deployv1.DeploymentConfig{},
